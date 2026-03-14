@@ -14,9 +14,15 @@ export function useAuth() {
       setLoading(false);
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
+
+      if (event === 'SIGNED_IN' && session?.user) {
+        const { id, email } = session.user;
+        const username = email ? email.split('@')[0] : id;
+        supabase.from('profiles').upsert({ id, username }).then(() => {});
+      }
     });
 
     return () => subscription.unsubscribe();
