@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { Alert } from 'react-native';
 import { supabase } from '../lib/supabase';
 import { CheckIn } from '../lib/types';
+import { checkAndAwardBadges } from './useBadges';
 
 type CheckInWithReview = CheckIn & {
   reviews: {
@@ -99,6 +101,11 @@ export function useCheckins() {
 
     await supabase.rpc('increment_cafe_checkin', { p_cafe_id: cafeId });
     await supabase.rpc('increment_user_stats', { p_user_id: userId, p_cafe_id: cafeId });
+
+    const newBadges = await checkAndAwardBadges(userId);
+    for (const badgeName of newBadges) {
+      Alert.alert('🏅 Badge Earned!', `You earned: ${badgeName}`);
+    }
 
     setLoading(false);
     return { success: true, error: null };
