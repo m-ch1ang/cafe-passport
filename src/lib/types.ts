@@ -253,7 +253,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_cafe_checkin: {
+        Args: { p_cafe_id: string }
+        Returns: undefined
+      }
+      increment_user_stats: {
+        Args: { p_user_id: string; p_cafe_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

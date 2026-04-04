@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MapScreen from '../screens/MapScreen';
 import CafeDetailScreen from '../screens/CafeDetailScreen';
+import CheckInModal from '../screens/CheckInModal';
 import FeedScreen from '../screens/FeedScreen';
 import PassportScreen from '../screens/PassportScreen';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -22,6 +23,11 @@ function MapStackNavigator() {
         name="CafeDetail"
         component={CafeDetailScreen}
         options={{ title: 'Café Details' }}
+      />
+      <MapStack.Screen
+        name="CheckInModal"
+        component={CheckInModal}
+        options={{ presentation: 'modal', title: 'Check In' }}
       />
     </MapStack.Navigator>
   );
