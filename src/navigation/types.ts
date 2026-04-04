@@ -5,3 +5,8 @@ export type MapStackParamList = {
   CafeDetail: { cafe: Cafe };
   CheckInModal: { cafe: Cafe };
 };
+
+export type FeedStackParamList = {
+  FeedHome: undefined;
+  UserProfile: { userId: string };
+};

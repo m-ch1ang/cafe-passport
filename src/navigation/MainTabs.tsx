@@ -7,7 +7,7 @@ import CheckInModal from '../screens/CheckInModal';
 import FeedScreen from '../screens/FeedScreen';
 import PassportScreen from '../screens/PassportScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import { MapStackParamList } from './types';
+import { MapStackParamList, FeedStackParamList } from './types';
 
 const MapStack = createNativeStackNavigator<MapStackParamList>();
 
@@ -33,6 +33,25 @@ function MapStackNavigator() {
   );
 }
 
+const FeedStack = createNativeStackNavigator<FeedStackParamList>();
+
+function FeedStackNavigator() {
+  return (
+    <FeedStack.Navigator>
+      <FeedStack.Screen
+        name="FeedHome"
+        component={FeedScreen}
+        options={{ headerShown: false }}
+      />
+      <FeedStack.Screen
+        name="UserProfile"
+        component={ProfileScreen}
+        options={{ title: 'Profile' }}
+      />
+    </FeedStack.Navigator>
+  );
+}
+
 const Tab = createBottomTabNavigator();
 
 export default function MainTabs() {
@@ -43,7 +62,11 @@ export default function MainTabs() {
         component={MapStackNavigator}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen
+        name="Feed"
+        component={FeedStackNavigator}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen name="Passport" component={PassportScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
